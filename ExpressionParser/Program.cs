@@ -20,7 +20,7 @@ namespace ExpressionParser
                     using StreamWriter sw = new StreamWriter(@"../../../Output.txt", true);
                     try
                     {
-                        sw.WriteLine(Convert.ToString(parser.calc()));
+                        sw.WriteLine(parser.calc());
                     }
                     catch (FileNotFoundException e)
                     {
