@@ -18,7 +18,14 @@ namespace ExpressionParser
                     Parser parser = new Parser(line);
 
                     using StreamWriter sw = new StreamWriter(@"../../../Output.txt", true);
-                    sw.WriteLine(Convert.ToString(parser.calc()));
+                    try
+                    {
+                        sw.WriteLine(Convert.ToString(parser.calc()));
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        Console.WriteLine("File path not specified." + e);
+                    }
                 }
             }
             catch (FileNotFoundException e)
