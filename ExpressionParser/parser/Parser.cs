@@ -87,7 +87,7 @@ namespace ExpressionParser.parser
                     return Convert.ToInt32(lexeme.GetValue());
 
                 case LexemeType.LeftBracket:
-                    int result = plusMinus(lexemeAnalyzer);
+                    int result = PlusMinus(lexemeAnalyzer);
                     lexeme = lexemeAnalyzer.Next();
 
                     if (lexeme.GetLexemeType() != LexemeType.RightBracket)
