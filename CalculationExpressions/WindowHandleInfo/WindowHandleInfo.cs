@@ -18,6 +18,7 @@ namespace CalculationExpressions
         {
             MainHandle = handle;
         }
+
         public List<IntPtr> GetAllChildHandles()
         {
             List<IntPtr> childHandles = new List<IntPtr>();
@@ -37,6 +38,7 @@ namespace CalculationExpressions
 
             return childHandles;
         }
+
         private bool EnumWindow(IntPtr hWnd, IntPtr lParam)
         {
             GCHandle gcChildhandlesList = GCHandle.FromIntPtr(lParam);

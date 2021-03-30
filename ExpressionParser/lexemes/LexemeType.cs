@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ExpressionParser.Lexemes
+﻿namespace ExpressionParser.Lexemes
 {
-    enum LexemeType
+    public enum LexemeType
     {
         Number,
         Plus,

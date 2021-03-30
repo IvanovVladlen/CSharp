@@ -21,7 +21,7 @@ namespace CalculationExpressions
                 {
                     Expression expression = new Expression(line);
 
-                    expression.startCalcAndWriterResult(@"../../../Output.txt");
+                    expression.StartCalcAndWriterResult(@"../../../Output.txt");
                 }
             }
             catch (Exception e)

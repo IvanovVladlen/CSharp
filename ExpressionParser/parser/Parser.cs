@@ -11,36 +11,37 @@ namespace ExpressionParser.parser
         {
             lexemeAnalyzer = new LexemeAnalyzer(expression);
         }
-        public int calc()
+        public int Calc()
         {
-            Lexeme lexeme = lexemeAnalyzer.next();
+            Lexeme lexeme = lexemeAnalyzer.Next();
+
             if (lexeme.GetLexemeType() == LexemeType.End)
             {
                 throw new ParsingException("empty expression");
             }
 
-            lexemeAnalyzer.back();
-            return plusMinus(lexemeAnalyzer);
+            lexemeAnalyzer.Back();
+            return PlusMinus(lexemeAnalyzer);
         }
-        public int plusMinus(LexemeAnalyzer lexemeAnalyzer)
+        public int PlusMinus(LexemeAnalyzer lexemeAnalyzer)
         {
-            int result = multDiv(lexemeAnalyzer);
+            int result = MultDiv(lexemeAnalyzer);
             while (true)
             {
-                Lexeme lexeme = lexemeAnalyzer.next();
+                Lexeme lexeme = lexemeAnalyzer.Next();
                 switch (lexeme.GetLexemeType())
                 {
                     case LexemeType.Plus:
-                        result += multDiv(lexemeAnalyzer);
+                        result += MultDiv(lexemeAnalyzer);
                         break;
 
                     case LexemeType.Minus:
-                        result -= multDiv(lexemeAnalyzer);
+                        result -= MultDiv(lexemeAnalyzer);
                         break;
 
                     case LexemeType.End:
                     case LexemeType.RightBracket:
-                        lexemeAnalyzer.back();
+                        lexemeAnalyzer.Back();
                         return result;
 
                     default:
@@ -48,27 +49,27 @@ namespace ExpressionParser.parser
                 }
             }
         }
-        public int multDiv(LexemeAnalyzer lexemeAnalyzer)
+        public int MultDiv(LexemeAnalyzer lexemeAnalyzer)
         {
-            int result = factor(lexemeAnalyzer);
+            int result = Factor(lexemeAnalyzer);
             while (true)
             {
-                Lexeme lexeme = lexemeAnalyzer.next();
+                Lexeme lexeme = lexemeAnalyzer.Next();
                 switch (lexeme.GetLexemeType())
                 {
                     case LexemeType.Mul:
-                        result *= factor(lexemeAnalyzer);
+                        result *= Factor(lexemeAnalyzer);
                         break;
 
                     case LexemeType.Div:
-                        result /= factor(lexemeAnalyzer);
+                        result /= Factor(lexemeAnalyzer);
                         break;
 
                     case LexemeType.End:
                     case LexemeType.RightBracket:
                     case LexemeType.Plus:
                     case LexemeType.Minus:
-                        lexemeAnalyzer.back();
+                        lexemeAnalyzer.Back();
                         return result;
 
                     default:
@@ -76,9 +77,9 @@ namespace ExpressionParser.parser
                 }
             }
         }
-        public int factor(LexemeAnalyzer lexemeAnalyzer)
+        public int Factor(LexemeAnalyzer lexemeAnalyzer)
         {
-            Lexeme lexeme = lexemeAnalyzer.next();
+            Lexeme lexeme = lexemeAnalyzer.Next();
 
             switch (lexeme.GetLexemeType())
             {
@@ -87,7 +88,7 @@ namespace ExpressionParser.parser
 
                 case LexemeType.LeftBracket:
                     int result = plusMinus(lexemeAnalyzer);
-                    lexeme = lexemeAnalyzer.next();
+                    lexeme = lexemeAnalyzer.Next();
 
                     if (lexeme.GetLexemeType() != LexemeType.RightBracket)
                     {

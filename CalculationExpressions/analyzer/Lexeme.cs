@@ -6,21 +6,23 @@ namespace CalculationExpressions.analyzer
 {
     class Lexeme
     {
-        private LexemeType LexemeType;
-        private string Value;
+        private LexemeType lexemeType;
+        private string value;
 
         public LexemeType GetLexemeType()
         {
-            return LexemeType;
+            return lexemeType;
         }
+
         public string GetValue()
         {
-            return Value;
+            return value;
         }
+
         public Lexeme(LexemeType lexemeType, string value)
         {
-            LexemeType = lexemeType;
-            Value = value;
+            this.lexemeType = lexemeType;
+            this.value = value;
         }
     }
 }

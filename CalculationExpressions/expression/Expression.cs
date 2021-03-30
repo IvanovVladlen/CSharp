@@ -10,12 +10,10 @@ namespace CalculationExpressions
 {
     class Expression
     {
-        private string expression;
         private static ExpressionAnalyzer expressionAnalyzer;
 
         public Expression(string expression)
         {
-            this.expression = expression;
             expressionAnalyzer = new ExpressionAnalyzer(expression);
         }
 
@@ -30,7 +28,7 @@ namespace CalculationExpressions
 
         const int WM_CHAR = 0x102;
 
-        public void startCalcAndWriterResult(string pathOutput)
+        public void StartCalcAndWriterResult(string pathOutput)
         {
             IntPtr calcHandle = FindWindow("CalcFrame", "Калькулятор");
 
@@ -45,11 +43,12 @@ namespace CalculationExpressions
             List<IntPtr> allChildWindows = new WindowHandleInfo(calcHandle).GetAllChildHandles();
 
             StringBuilder result = new StringBuilder();
+
             for (int i = 0; i < allChildWindows.Count; i++)
             {
                 GetWindowText(allChildWindows[i], result, result.Capacity);
 
-                if (isDigitsOnly(result.ToString()) && result.Length > 0)
+                if (IsDigitsOnly(result.ToString()) && result.Length > 0)
                 {
                     break;
                 }
@@ -65,7 +64,7 @@ namespace CalculationExpressions
                 Console.WriteLine("Error" + e);
             }
         }
-        static bool isDigitsOnly(string str)
+        static bool IsDigitsOnly(string str)
         {
             foreach (char c in str)
             {

@@ -17,10 +17,10 @@ namespace ExpressionParser
                 {
                     Parser parser = new Parser(line);
 
-                    using StreamWriter sw = new StreamWriter(@"../../../Output.txt", true);
+                    using StreamWriter writer = new StreamWriter(@"../../../Output.txt", true);
                     try
                     {
-                        sw.WriteLine(parser.calc());
+                        writer.WriteLine(parser.Calc());
                     }
                     catch (FileNotFoundException e)
                     {

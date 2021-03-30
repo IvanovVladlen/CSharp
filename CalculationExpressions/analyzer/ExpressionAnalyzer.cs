@@ -12,7 +12,7 @@ namespace CalculationExpressions
         public ExpressionAnalyzer(string expression)
         {
             this.expression = expression;
-            analyse(expression);
+            Analyse(expression);
 
             lexemes.Add(new Lexeme(LexemeType.End, "="));
             if (lexemes.Count == 1)
@@ -27,19 +27,22 @@ namespace CalculationExpressions
         }
 
         private int pos;
-        public Lexeme next()
+        public Lexeme Next()
         {
             return lexemes[pos++];
         }
-        public void back()
+
+        public void Back()
         {
             pos--;
         }
-        public int getPos()
+
+        public int GetPos()
         {
             return pos;
         }
-        public void analyse(string s)
+
+        public void Analyse(string s)
         {
             for (int i = 0; i < s.Length; i++)
             {
