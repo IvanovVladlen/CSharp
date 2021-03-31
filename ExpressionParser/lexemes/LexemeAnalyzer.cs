@@ -7,11 +7,9 @@ namespace ExpressionParser.Lexemes
     public class LexemeAnalyzer
     {
         private protected List<Lexeme> lexemes = new List<Lexeme>();
-        private string expression;
 
         public LexemeAnalyzer(string expression)
         {
-            this.expression = expression;
             Analyse(expression);
 
             lexemes.Add(new Lexeme(LexemeType.End, "="));
