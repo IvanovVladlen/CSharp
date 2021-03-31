@@ -4,6 +4,10 @@ using System.Runtime.InteropServices;
 
 namespace CalculationExpressions
 {
+
+    /// <summary>
+    /// Класс для получения дочерних окон
+    /// </summary>
     class WindowHandleInfo
     {
         private delegate bool EnumWindowProc(IntPtr hwnd, IntPtr lParam);

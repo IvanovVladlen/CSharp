@@ -18,29 +18,29 @@ namespace CalculationExpressions
         }
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        static extern IntPtr FindWindow(string lpClassName, string lpWindowName); //импорт методов для работы с WinApi
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam); //импорт методов для работы с WinApi
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+        static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount); //импорт методов для работы с WinApi
 
         const int WM_CHAR = 0x102;
 
         public void StartCalcAndWriterResult(string pathOutput)
         {
-            IntPtr calcHandle = FindWindow("CalcFrame", "Калькулятор");
+            IntPtr calcHandle = FindWindow("CalcFrame", "Калькулятор"); //получение handle окна калькулятора
 
             List<Lexeme> lexemes = expressionAnalyzer.GetLexemes();
 
             for (int i = 0; i < lexemes.Count; i++)
             {
-                PostMessage(calcHandle, WM_CHAR, (IntPtr)lexemes[i].GetValue()[0], IntPtr.Zero);
+                PostMessage(calcHandle, WM_CHAR, (IntPtr)lexemes[i].GetValue()[0], IntPtr.Zero); //передача калькулятору данных
                 Thread.Sleep(500);
             }
 
-            List<IntPtr> allChildWindows = new WindowHandleInfo(calcHandle).GetAllChildHandles();
+            List<IntPtr> allChildWindows = new WindowHandleInfo(calcHandle).GetAllChildHandles(); //получение листа handl-лов дочерних форм калькулятора
 
             StringBuilder result = new StringBuilder();
 
@@ -48,7 +48,7 @@ namespace CalculationExpressions
             {
                 GetWindowText(allChildWindows[i], result, result.Capacity);
 
-                if (IsDigitsOnly(result.ToString()) && result.Length > 0)
+                if (IsDigitsOnly(result.ToString()) && result.Length > 0) //определение по заголовкам форм результата
                 {
                     break;
                 }
@@ -57,7 +57,7 @@ namespace CalculationExpressions
             using StreamWriter writer = new StreamWriter(pathOutput, true);
             try
             {
-                writer.WriteLine(result);
+                writer.WriteLine(result); // запись результата
             }
             catch (Exception e)
             {
