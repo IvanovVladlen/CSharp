@@ -15,12 +15,12 @@ namespace ExpressionParser
 
                 while ((line = reader.ReadLine()) != null)
                 {
-                    Parser parser = new Parser(line);
+                    Expression expression = new Expression(line); //создание объекта выражения и передача ему строки с выражением
 
                     using StreamWriter writer = new StreamWriter(@"../../../Output.txt", true);
                     try
                     {
-                        writer.WriteLine(parser.Calc());
+                        writer.WriteLine(expression.Calc()); //запись результата выражения в файл
                     }
                     catch (FileNotFoundException e)
                     {
