@@ -4,6 +4,9 @@ using System.Text;
 
 namespace ExpressionParser.Lexemes
 {
+    /// <summary>
+    ///  Класс для анализа лексических выражений (Lexeme)
+    /// </summary>
     public class LexemeAnalyzer
     {
         private protected List<Lexeme> lexemes = new List<Lexeme>();
