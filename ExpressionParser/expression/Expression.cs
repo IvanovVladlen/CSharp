@@ -7,10 +7,11 @@ namespace ExpressionParser.parser
 
     /// <summary>
     ///  Recursive descent parser
-    //    Calc : PlusMinus* EOF ;
-    //    PlusMinus: MultDiv ( ( '+' | '-' ) MultDiv )* ;
-    //    MultDiv : Factor ( ( '*' | '/' ) Factor )* ;
-    //    Factor : NUMBER | '(' Calc ')' ;
+    ///  Calc : PlusMinus* EOF ;
+    ///  PlusMinus: MultDiv ( ( '+' | '-' ) MultDiv )* ;
+    ///  MultDiv : Factor ( ( '*' | '/' ) Factor )* ;
+    ///  Factor : NUMBER | '(' Calc ')' ;
+    ///  Unary : '-' Factor
     /// </summary>
     class Expression
     {
@@ -89,14 +90,18 @@ namespace ExpressionParser.parser
         public int Factor(LexemeAnalyzer lexemeAnalyzer)
         {
             Lexeme lexeme = lexemeAnalyzer.Next();
+            int result;
 
             switch (lexeme.GetLexemeType())
             {
+                case LexemeType.Minus:
+                    result = Factor(lexemeAnalyzer);
+                    return -result;
                 case LexemeType.Number:
                     return Convert.ToInt32(lexeme.GetValue());
 
                 case LexemeType.LeftBracket:
-                    int result = PlusMinus(lexemeAnalyzer);
+                    result = PlusMinus(lexemeAnalyzer);
                     lexeme = lexemeAnalyzer.Next();
 
                     if (lexeme.GetLexemeType() != LexemeType.RightBracket)
